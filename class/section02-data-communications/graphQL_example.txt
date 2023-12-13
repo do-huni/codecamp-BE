@@ -1,0 +1,5 @@
+연습용
+http://backend-example.codebootcamp.co.kr/graphql
+
+실전용
+https://backend-practice.codebootcamp.co.kr/graphql
