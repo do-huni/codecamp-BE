@@ -1,11 +1,23 @@
 import express from 'express';
+import path from "path";
 import {checkPhone, getToken, sendTokenToSMS} from './phone.js';
-
-
-
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 import * as qqq from './phone.js'; //export 다가져오기. as 필수
+import {options} from './swagger/config.js';
+import cors from 'cors';
+
+//__dirname 선언
+const __dirname = path.resolve();
+
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
+app.use(express.static(__dirname+ "/frontend"));
+app.get('/', (req, res) => {
+	res.sendFile(__dirname+ '/frontend/signup.html');
+});
 
 app.get('/boards', (req, res) => {
   // 1. 데이터를 조회하는 로직 => DB에 접속해서 데이터 꺼내오기

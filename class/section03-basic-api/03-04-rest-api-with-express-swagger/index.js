@@ -1,11 +1,13 @@
 import express from 'express';
 import {checkPhone, getToken, sendTokenToSMS} from './phone.js';
-
-
-
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 import * as qqq from './phone.js'; //export 다가져오기. as 필수
+import {options} from './swagger/config.js';
+
 const app = express();
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
 app.get('/boards', (req, res) => {
   // 1. 데이터를 조회하는 로직 => DB에 접속해서 데이터 꺼내오기
