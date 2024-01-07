@@ -39,7 +39,6 @@ export class ProductsResolver{
 	}
 	
 	
-	//48분 20초. 수정 부분까지 했음
 	@Mutation(()=> Product)
 	updateProduct(
 	 @Args("productId")
