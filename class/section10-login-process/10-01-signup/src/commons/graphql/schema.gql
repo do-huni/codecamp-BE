@@ -9,6 +9,13 @@ type Board {
   contents: String!
 }
 
+type User {
+  id: String!
+  name: String!
+  email: String!
+  age: Int!
+}
+
 type ProductSalesLocation {
   id: String!
   address: String!
@@ -26,12 +33,6 @@ scalar DateTime
 type ProductCategory {
   id: String!
   name: String!
-}
-
-type User {
-  id: String!
-  name: String!
-  email: String!
 }
 
 type ProductTag {
@@ -67,6 +68,7 @@ type Mutation {
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Boolean!
   createProductCategory(name: String!): ProductCategory!
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 input CreateBoardInput {
@@ -81,6 +83,7 @@ input CreateProductInput {
   price: Int!
   productSalesLocation: ProductSalesLocationInput!
   productCategoryId: String!
+  productTags: [String!]!
 }
 
 input ProductSalesLocationInput {
@@ -97,4 +100,11 @@ input UpdateProductInput {
   price: Int
   productSalesLocation: ProductSalesLocationInput
   productCategoryId: String
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  age: Int!
+  password: String!
 }

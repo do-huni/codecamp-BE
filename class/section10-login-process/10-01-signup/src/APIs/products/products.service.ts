@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { IProductsServiceDelete, IProductsServiceCheckSoldout, IProductsServiceCreate, IProductsServiceFindOne, IProductsServiceUpdate } from "./interfaces/products.service.interface"
 import {ProductsSalesLocationsService} from "../productsSalesLocations/productsSalesLocations.service";
+import {ProductsTagsService} from "../productsTags/productsTags.service";
 
 @Injectable()
 export class ProductsService{
@@ -12,6 +13,7 @@ export class ProductsService{
 	@InjectRepository(Product)
 	private readonly productsRepository: Repository<Product>,
 	private readonly productsSalesLocationsService: ProductsSalesLocationsService,	 
+	private readonly productsTagsService: ProductsTagsService,
 	){}
 	
 	async create({createProductInput}: IProductsServiceCreate): Promise<Product>{
@@ -22,9 +24,19 @@ export class ProductsService{
 		// return result;
 		
 		// 2. 상품과 상품 거래 위치를 같이 등록하는 방법
-		const { productSalesLocation, productCategoryId, ...product } = createProductInput;
+		const { productSalesLocation, productCategoryId, productTags, ...product } = createProductInput;
 		const result = await this.productsSalesLocationsService.create({productSalesLocation});
 		// 서비스를 타고 가야하는 이유는 검증로직 통일을 위해서.
+		// tag가 ["#컴퓨터", "#전자제품"] 식의 구조라고 가정
+		
+		const tagNames = productTags.map(el=>el.replace("#", ""))		
+		const prevTags = await this.productsTagsService.findByNames({tagNames})
+		const uniqueTags = await this.productsTagsService.deduplication({tagNames, prevTags});
+	
+		
+		const newTags = await this.productsTagsService.bulkInsert({names: uniqueTags});
+		
+		const tags = [...prevTags, ...newTags.identifiers];
 		
 		const result2 = await this.productsRepository.save({
 			...createProductInput,
@@ -32,7 +44,8 @@ export class ProductsService{
 			productCategory: {
 				id: productCategoryId,
 // 				만약 name 데이터도 받고 싶으면 dto에 name도 넣어서 등록하기
-			}
+			},
+			productTags: tags // id 배열
 		});
 		return result2;
 	}
