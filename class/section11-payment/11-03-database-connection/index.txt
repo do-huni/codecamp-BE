@@ -1,0 +1,18 @@
+show databases;
+use myproject;
+show tables;
+
+#DB 설정값 체크(커넥션 최대값: max_connections)
+show variables;
+
+#커넥션 최대값 변경
+set global max_connections = 15;
+
+#현재 연결된 커넥션 개수 확인(Thread_connected)
+show status
+
+#현재 연결된 커넥션 목록 확인
+show processlist;
+
+#커넥션 끊기
+kill {connection_id}
