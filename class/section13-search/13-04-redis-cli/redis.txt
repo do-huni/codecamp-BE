@@ -1,0 +1,26 @@
+# redis 설치
+sudo apt-get install redis-server
+
+# 서버 실행 (foreground)
+redis-server
+
+# cli 접근
+redis-cli
+
+# 모든 키 조회
+keys *
+
+# 키 등록
+set aaa 123
+
+# 키 조회
+get aaa
+
+# 키 ttl(time to live) 조회
+ttl aaa
+
+# 저장 기간 지정
+expire aaa 10 //(sec)
+
+# 나가기
+quit || exit
