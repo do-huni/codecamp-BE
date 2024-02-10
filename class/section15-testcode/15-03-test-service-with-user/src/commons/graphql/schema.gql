@@ -1,0 +1,142 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  age: Int!
+  point: Int!
+}
+
+type Board {
+  number: Int!
+  writer: String!
+  title: String!
+  contents: String!
+}
+
+type Payment {
+  id: String!
+  amount: Int!
+  tax: Int!
+  commission: Int!
+}
+
+type PointTransaction {
+  id: String!
+  impUid: String!
+  amount: Int!
+  status: POINT_TRANSACTION_STATUS_ENUM!
+  user: User!
+  createdAt: DateTime!
+}
+
+enum POINT_TRANSACTION_STATUS_ENUM {
+  PAYMENT
+  CANCEL
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ProductSalesLocation {
+  id: String!
+  address: String!
+  addressDetail: String!
+  lat: Float!
+  lng: Float!
+  meetingTime: DateTime!
+}
+
+type ProductCategory {
+  id: String!
+  name: String!
+}
+
+type ProductTag {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Product {
+  id: String!
+  name: String!
+  description: String!
+  price: Int!
+  isSoldout: Boolean!
+  productSalesLocation: ProductSalesLocation!
+  productCategory: ProductCategory!
+  user: User!
+  productTags: [ProductTag!]!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String!
+}
+
+type Query {
+  fetchUser: User!
+  fetchBoards: [Board!]
+  fetchProduct(productId: String!): Product!
+  fetchProducts: [Product!]!
+  fetchPayments: [Payment!]!
+}
+
+type Mutation {
+  login(email: String!, password: String!): String!
+  restoreAccessToken: String!
+  createUser(createUserInput: CreateUserInput!): User!
+  createBoard(createBoardInput: CreateBoardInput!): String!
+  uploadFiles(files: [Upload!]!): [String!]!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Boolean!
+  createProductCategory(name: String!): ProductCategory!
+  createPointTransaction(impUid: String!, amount: Int!): PointTransaction!
+  createPayment(amount: Float!): Payment!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  age: Int!
+  password: String!
+}
+
+input CreateBoardInput {
+  writer: String!
+  title: String!
+  contents: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Int!
+  productSalesLocation: ProductSalesLocationInput!
+  productCategoryId: String!
+  productTags: [String!]!
+}
+
+input ProductSalesLocationInput {
+  address: String!
+  addressDetail: String!
+  lat: Float!
+  lng: Float!
+  meetingTime: DateTime!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  productSalesLocation: ProductSalesLocationInput
+  productCategoryId: String
+}
