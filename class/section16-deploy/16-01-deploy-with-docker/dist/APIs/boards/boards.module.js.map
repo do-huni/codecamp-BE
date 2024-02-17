@@ -1,0 +1,1 @@
+{"version":3,"file":"boards.module.js","sourceRoot":"","sources":["../../../src/APIs/boards/boards.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,uDAAmD;AACnD,qDAAiD;AAS1C,IAAM,YAAY,GAAlB,MAAM,YAAY;CAAG,CAAA;AAAf,oCAAY;uBAAZ,YAAY;IAPxB,IAAA,eAAM,EAAC;QACN,OAAO,EAAE,EAAE;QACX,SAAS,EAAE;YACV,8BAAa;YACb,gCAAc;SACd;KACF,CAAC;GACW,YAAY,CAAG"}

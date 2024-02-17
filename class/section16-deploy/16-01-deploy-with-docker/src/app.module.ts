@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { CacheModule } from '@nestjs/cache-manager';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -14,8 +13,7 @@ import { ProductsModule } from './APIs/products/products.module';
 import { ProductsCategoriesModule } from './APIs/productsCategories/productsCategories.module';
 import { Board } from './APIs/boards/entities/board.entity';
 import { ConfigModule } from "@nestjs/config"
-import { RedisClientOptions } from 'redis'; 
-import * as redisStore from 'cache-manager-redis-store'; 
+
 
 @Module({
   imports: [
@@ -49,10 +47,6 @@ import * as redisStore from 'cache-manager-redis-store';
 		  synchronize: true,
 		  logging: true,	
 	  }),
-	  CacheModule.register<RedisClientOptions>({
-		  store: redisStore,
-		  isGlobal: true,
-	  })
   ],
   controllers: [
 	  AppController

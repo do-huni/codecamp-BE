@@ -6,13 +6,13 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([
-
+			FilesResolver,
+			FilesService,
 		])
 	],
 	
 	providers: [
-		FilesResolver,
-		FilesService,		
+		
 	]
 })
 export class FilesModule{}
