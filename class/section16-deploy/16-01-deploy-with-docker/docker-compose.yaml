@@ -21,4 +21,4 @@ services:
     environment:
       MYSQL_DATABASE: 'mydocker'
       MYSQL_ROOT_PASSWORD: 'root'
-    ports:
+    ports: 3306
