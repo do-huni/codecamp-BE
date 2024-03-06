@@ -7,6 +7,7 @@ const http_exception_filter_1 = require("./commons/filter/http-exception.filter"
 const path_1 = require("path");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.enableCors();
     app.setViewEngine("hbs");
     app.setBaseViewsDir((0, path_1.join)(__dirname, '..', 'views'));
     app.useGlobalPipes(new common_1.ValidationPipe());

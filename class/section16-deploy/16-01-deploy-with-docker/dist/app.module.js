@@ -35,7 +35,9 @@ exports.AppModule = AppModule = __decorate([
             pointsTransactions_module_1.PointsTransactionsModule,
             payments_module_1.PaymentsModule,
             users_module_1.UsersModule,
-            config_1.ConfigModule.forRoot(),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
                 autoSchemaFile: "src/commons/graphql/schema.gql",

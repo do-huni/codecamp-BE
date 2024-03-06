@@ -25,7 +25,9 @@ import { ConfigModule } from "@nestjs/config"
 	  PointsTransactionsModule,
 	  PaymentsModule,
 	  UsersModule,
-	  ConfigModule.forRoot(),
+	  ConfigModule.forRoot({
+		isGlobal: true,
+	  }),
 	  GraphQLModule.forRoot<ApolloDriverConfig>({
 		  driver: ApolloDriver,
 		  autoSchemaFile: "src/commons/graphql/schema.gql",

@@ -11,9 +11,7 @@
 FROM node:14
 
 # 2. 내 컴퓨터에 있는 폴더/파일을 도커 컴퓨터 안으로 복사하기
-RUN mkdir myfolder
-COPY ./index.js /myfolder/index.js
-RUN cd myfolder
+COPY ./index.js /index.js
 
 # 3. 도커 안에서 index.js 실행시키기
 CMD node index.js
