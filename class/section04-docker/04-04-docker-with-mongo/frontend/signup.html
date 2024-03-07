@@ -1,0 +1,40 @@
+<!--  signup.html -->
+<html lang = "ko">
+<head>
+    <title>회원가입 연습하기</title>
+</head>	
+<body>
+	이름: <input type="text" id="myname"/>
+	나이: <input type="text" id="myage"/>
+	이메일: <input type="text" id="myemail"/>
+	학교: <input type="text" id="myschool"/>
+	
+	<button onclick = "check()">인증하기</button><br />
+	<div id="result">인증상태</div>
+	<button>회원가입하기</button>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+	  function check() {
+		// 1. 입력한 휴대폰번호 가져오기
+		const myname = document.getElementById('myname').value;
+		const myage = document.getElementById('myage').value;
+		const myemail = document.getElementById('myemail').value;
+		const myschool = document.getElementById('myschool').value;
+
+		// 2. 해당 휴대폰번호로 인증번호API 요청하기
+		axios
+		  .post('https://bootcamp-qgzln.run.goorm.site/tokens/email', {
+			name: myname,
+			school: myschool,
+			email: myemail,
+			age: myage
+		  })
+		  .then((res) => {
+			console.log(res);
+						document.getElementById("result").innerText = res.data
+		  });
+	  }
+	</script>
+</body>	
+</html>
